@@ -1,0 +1,41 @@
+[project]
+name = "oratio_serve"
+version = "0.1.0"
+description = "A REST API inference service for speech AI models."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]~=0.115.5",
+    "nemo_toolkit[asr]~=2.0.0",
+    "pydantic~=2.10.1",
+    "python-dotenv~=1.0.0",
+    "packaging~=24.2",
+    "cython~=3.0.0",
+    "torch~=2.5.1",
+    "torchaudio~=2.5.1",
+    "pydantic-settings>=2.6.1",
+    "uvicorn>=0.32.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "flake8>=6.0.0",
+    "black>=23.0.0",
+]
+
+[project.scripts]
+oratio-serve = "oratio_serve.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.sdist]
+include = ["oratio_serve/**"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["oratio_serve"]

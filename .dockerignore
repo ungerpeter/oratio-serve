@@ -1,0 +1,6 @@
+.venv
+hf_cache
+.gitignore
+docker-compose.yaml
+Dockerfile
+dist

@@ -1,0 +1,30 @@
+services:
+  oratio-serve:
+    runtime: nvidia
+    container_name: oratio-serve
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #command: ["oratio-serve"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./hf_cache:/hf_cache
+    networks:
+      - oratio-serve
+      - llm-kit
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+networks:
+  oratio-serve:
+    name: oratio-serve
+    driver: bridge
+  llm-kit:
+    name: llm-kit
+    external: true
